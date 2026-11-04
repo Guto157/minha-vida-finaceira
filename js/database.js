@@ -28,6 +28,7 @@ function saveMonth(y,m,month){
 }
 function all(){return read().months}
 function importData(data){if(!data||!data.months||typeof data.months!=='object')throw new Error('Arquivo de backup inválido.');write(data)}
+function replaceData(data){if(!data||!data.months||typeof data.months!=='object')throw new Error('Dados financeiros inválidos.');write(data,false)}
 function mergeData(remote,local){
  const merged={months:{}};
  const keys=new Set([...Object.keys(remote&&remote.months||{}),...Object.keys(local&&local.months||{})]);
@@ -48,5 +49,5 @@ function mergeData(remote,local){
  });
  return merged;
 }
-window.Database={key,getMonth,saveMonth,all,importData,read,mergeData};
+window.Database={key,getMonth,saveMonth,all,importData,replaceData,read,mergeData};
 })();

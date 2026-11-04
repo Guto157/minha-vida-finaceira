@@ -5,7 +5,7 @@ const TABLE='user_finance_data',SESSION_KEY='mvf_supabase_session';
 const $=id=>document.getElementById(id);
 let session=null,busy=false,timer=null;
 function status(message){$('cloudStatus').textContent=message}
-function saveSession(value){session=value;if(value)localStorage.setItem(SESSION_KEY,JSON.stringify(value));else localStorage.removeItem(SESSION_KEY);renderAuth()}
+function saveSession(value){if(value&&value.expires_in&&!value.expires_at)value.expires_at=Math.floor(Date.now()/1000)+Number(value.expires_in);session=value;if(value)localStorage.setItem(SESSION_KEY,JSON.stringify(value));else localStorage.removeItem(SESSION_KEY);renderAuth()}
 function renderAuth(){
  const logged=!!(session&&session.access_token);
  $('cloudForm').hidden=logged||!$('cloudForm').dataset.open;
@@ -46,7 +46,7 @@ async function synchronize(){
   if(!await validSession())throw new Error('Sua sessão expirou. Entre novamente.');
   const local=Database.read(),remote=await cloudData();
   const merged=Database.mergeData(remote||{months:{}},local);
-  Database.importData(merged);
+  Database.replaceData(merged);
   await upload(merged);
   status('Sincronizado. Seus aparelhos estão atualizados.');
   window.dispatchEvent(new Event('finance-cloud-updated'));
