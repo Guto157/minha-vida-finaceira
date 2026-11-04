@@ -1,4 +1,4 @@
-const CACHE='minha-vida-financeira-v20';
+const CACHE='minha-vida-financeira-v21';
 const FILES=['./','./index.html','./css/style.css?v=17','./js/database.js','./js/financeiro.js','./js/historico.js','./js/app.js?v=12','./js/backup.js','./js/sync.js?v=2','./manifest.webmanifest','./assets/icons/icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));

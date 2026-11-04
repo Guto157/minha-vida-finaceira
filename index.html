@@ -7,7 +7,7 @@
   <meta name="description" content="Organize suas dívidas e pagamentos em um caderno financeiro digital.">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="assets/icons/icon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="css/style.css?v=17">
+  <link rel="stylesheet" href="css/style.css?v=18">
   <title>Minha Vida Financeira</title>
 </head>
 <body>
@@ -24,8 +24,8 @@
         <button class="side-menu-item" id="importDataBtn"><span>↑</span><span><strong>Restaurar backup</strong><small>Recuperar dados salvos</small></span></button>
         <button class="side-menu-item" id="historyBtn"><span>▦</span><span><strong>Histórico mensal</strong><small>Consultar outros meses</small></span></button>
       </div>
-      <input id="restoreFile" type="file" accept="application/json,.json" hidden>
-    </aside></div>
+      <div class="side-menu-account">
+        <span class="eyebrow">CONTA E SINCRONIZAÇÃO</span>
     <section class="cloud-sync" aria-label="Sincronização entre aparelhos">
       <div class="cloud-sync-top"><div><strong id="cloudTitle">Sincronizar aparelhos</strong><small id="cloudStatus">Seus dados continuam salvos neste aparelho.</small></div><button type="button" id="cloudOpenBtn">Conectar</button></div>
       <form id="cloudForm" class="cloud-form" hidden>
@@ -35,6 +35,10 @@
       </form>
       <button type="button" id="cloudLogoutBtn" class="cloud-logout" hidden>Sair da conta</button>
     </section>
+      </div>
+      <input id="restoreFile" type="file" accept="application/json,.json" hidden>
+    </aside></div>
+
     <section class="month-heading">
       <button class="month-arrow" id="prevMonth" aria-label="Mês anterior">‹</button>
       <div><span class="eyebrow">FOLHA DO MÊS</span><h2 id="monthTitle">Mês</h2></div>

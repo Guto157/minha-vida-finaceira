@@ -247,3 +247,19 @@ button:focus-visible{outline:3px solid #79a9b9;outline-offset:2px}
  .reserve-input-row input,.reserve-input-row button{flex:1 1 100%;width:100%}
  .view-tab{font-size:11px}
 }
+
+
+/* Conta e sincronização dentro do menu lateral */
+.side-menu-account{margin-top:22px;padding-top:18px;border-top:1px solid #dce5e8}
+.side-menu-account>.eyebrow{display:block;margin:0 2px 10px;color:#788b91;font-size:9px;letter-spacing:1.2px;font-weight:800}
+.side-menu-account .cloud-sync{margin:0;padding:13px;border:1px solid #dce5e8;border-radius:12px;background:#fffdf7}
+.side-menu-account .cloud-sync-top{align-items:flex-start}
+.side-menu-account .cloud-sync-top>div{min-width:0;flex:1}
+.side-menu-account .cloud-sync-top strong{font-size:12px;line-height:1.4}
+.side-menu-account .cloud-sync-top small{font-size:10px;overflow-wrap:anywhere}
+.side-menu-account .cloud-sync-top button{flex:0 0 auto}
+.side-menu-account .cloud-form{gap:8px}
+.side-menu-account .cloud-form-actions{display:grid;grid-template-columns:1fr 1fr}
+.side-menu-account .cloud-form-actions button{min-height:38px;padding:9px 7px}
+.side-menu-account .cloud-form-actions button:last-child{grid-column:1/-1}
+.side-menu-account .cloud-logout{width:100%;min-height:40px}
