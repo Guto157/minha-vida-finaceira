@@ -1,6 +1,6 @@
 (function(){
 const KEY='minhaVidaFinanceira_v1';
-function read(){try{return JSON.parse(localStorage.getItem(KEY))||{months:{}}}catch(e){return{months:{}}}}
+function read(){try{const data=JSON.parse(localStorage.getItem(KEY))||{months:{}};Object.values(data.months||{}).forEach(month=>{month.carry=0});return data}catch(e){return{months:{}}}}
 function write(data,notify=true){localStorage.setItem(KEY,JSON.stringify(data));if(notify)window.dispatchEvent(new Event('finance-data-changed'))}
 function key(y,m){return y+'-'+String(m+1).padStart(2,'0')}
 function total(month){return (month.entries||[]).reduce((sum,e)=>sum+(e.type==='debt'?1:-1)*Number(e.amount||0),0)}
