@@ -14,8 +14,19 @@
   <main class="app-shell">
     <header class="topbar">
       <div><span class="eyebrow">MEU CADERNO</span><h1>Minha Vida Financeira</h1></div>
-      <details class="tools-menu"><summary aria-label="Abrir opções" title="Opções">⋯</summary><div class="tools-panel"><button class="mini-tool" id="backupBtn" title="Baixar relatório em PDF"><span>▤</span> Baixar PDF</button><button class="mini-tool" id="exportDataBtn" title="Criar backup dos dados"><span>↓</span> Fazer backup</button><button class="mini-tool" id="importDataBtn" title="Restaurar backup"><span>↑</span> Restaurar backup</button></div><input id="restoreFile" type="file" accept="application/json,.json" hidden></details>
+      <button class="side-menu-toggle" id="openSideMenu" aria-label="Abrir menu">☰</button>
     </header>
+    <div class="side-menu-backdrop" id="sideMenuBackdrop"></div>
+    <aside class="side-menu" id="sideMenu" aria-label="Menu lateral" aria-hidden="true">
+      <div class="side-menu-head"><div><span class="eyebrow">MINHA VIDA FINANCEIRA</span><h2>Menu</h2></div><button class="side-menu-close" id="closeSideMenu" aria-label="Fechar menu">×</button></div>
+      <div class="side-menu-items">
+        <button class="side-menu-item" id="backupBtn"><span>▤</span><span><strong>Baixar PDF</strong><small>Relatório das dívidas e pagamentos</small></span></button>
+        <button class="side-menu-item" id="exportDataBtn"><span>↓</span><span><strong>Fazer backup</strong><small>Salvar uma cópia dos seus dados</small></span></button>
+        <button class="side-menu-item" id="importDataBtn"><span>↑</span><span><strong>Restaurar backup</strong><small>Recuperar dados salvos</small></span></button>
+        <button class="side-menu-item" id="historyBtn"><span>▦</span><span><strong>Histórico mensal</strong><small>Consultar outros meses</small></span></button>
+      </div>
+      <input id="restoreFile" type="file" accept="application/json,.json" hidden>
+    </aside>
     <section class="month-heading">
       <button class="month-arrow" id="prevMonth" aria-label="Mês anterior">‹</button>
       <div><span class="eyebrow">FOLHA DO MÊS</span><h2 id="monthTitle">Mês</h2></div>
@@ -58,7 +69,7 @@
   <script src="js/database.js"></script>
   <script src="js/financeiro.js"></script>
   <script src="js/historico.js"></script>
-  <script src="js/app.js?v=8"></script>
+  <script src="js/app.js?v=9"></script>
   <script src="js/backup.js?v=1"></script>
 </body>
 </html>
