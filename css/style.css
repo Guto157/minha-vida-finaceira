@@ -47,3 +47,84 @@
 .side-menu-item:active{background:#edf3f5}
 .side-menu-toggle{width:42px;height:42px;border:1px solid #d7e2e8;border-radius:12px;background:#eef3f5;color:#315a75;font-size:22px;cursor:pointer;display:grid;place-items:center}
 body.menu-open{overflow:hidden}
+
+
+/* Responsividade por largura de tela */
+html{ -webkit-text-size-adjust:100%; text-size-adjust:100% }
+body{padding:clamp(0px,2.2vw,24px) 12px calc(18px + env(safe-area-inset-bottom))}
+.app-shell{width:min(100%,560px);min-height:calc(100svh - 40px);padding:clamp(16px,3vw,26px) clamp(14px,3vw,22px) 20px}
+.topbar h1{font-size:clamp(18px,3.8vw,22px)}
+.month-heading h2{font-size:clamp(25px,5vw,32px)}
+.balance-card{padding:clamp(15px,3vw,22px)}
+.balance-card>strong{font-size:clamp(27px,6vw,36px);overflow-wrap:anywhere}
+.balance-details{flex-wrap:wrap;font-size:clamp(10px,2.3vw,12px)}
+.action-btn{min-height:46px;padding:12px 8px;font-size:clamp(11px,2.5vw,13px)}
+.notebook{padding:clamp(11px,2.5vw,16px)}
+.entry{grid-template-columns:30px minmax(0,1fr) auto;gap:clamp(6px,1.8vw,10px)}
+.entry-desc{min-width:0;overflow-wrap:anywhere}
+.entry-value{font-size:clamp(11px,2.5vw,13px)}
+.side-menu-panel{width:min(360px,88vw)}
+dialog{max-height:calc(100svh - 24px);overflow-y:auto}
+
+@media (min-width:600px){
+  body{padding:24px 18px 32px}
+  .app-shell{width:min(100%,680px);min-height:calc(100svh - 56px);padding:28px 30px 24px;border-radius:12px}
+  .app-shell:before{left:19px}
+  .topbar{padding-left:12px}
+  .topbar h1{font-size:23px}
+  .month-heading{margin:30px 10px 18px}
+  .balance-card{padding:23px 26px}
+  .actions{gap:14px;margin:18px 0 22px}
+  .action-btn{min-height:52px;font-size:13px}
+  .notebook{padding:18px 17px}
+  .entry{padding:12px 5px}
+  .entry-desc,.entry-value{font-size:14px}
+  .entry-date{font-size:11px}
+  .history-button{padding:15px}
+}
+@media (min-width:900px){
+  body{padding:30px 24px 40px}
+  .app-shell{width:min(100%,760px);min-height:calc(100svh - 70px);padding:30px 38px 26px}
+  .app-shell:before{left:24px}
+  .topbar h1{font-size:25px}
+  .month-heading{margin:34px 12px 20px}
+  .month-heading h2{font-size:34px}
+  .balance-card{padding:25px 30px}
+  .balance-card>strong{font-size:38px}
+  .notebook{padding:20px 22px}
+}
+@media (max-width:420px){
+  body{padding:0}
+  .app-shell{width:100%;min-height:100svh;border-radius:0;padding:16px 14px calc(18px + env(safe-area-inset-bottom))}
+  .app-shell:before{left:9px}
+  .topbar{padding-left:5px}
+  .topbar h1{font-size:clamp(16px,4.5vw,19px)}
+  .month-heading{margin:22px 0 13px}
+  .month-arrow{width:34px;height:34px}
+  .balance-details{gap:5px 12px}
+  .actions{gap:8px;margin:13px 0 16px}
+  .action-btn{padding:11px 5px}
+  .notebook{padding:11px 9px}
+  .notebook-title h3{font-size:21px}
+  .entry{grid-template-columns:27px minmax(0,1fr) auto;gap:6px;padding:9px 0}
+  .erase{width:26px;height:26px}
+  .entry-desc{font-size:12px}
+  .entry-value{font-size:11px}
+}
+@media (max-width:340px){
+  .topbar h1{font-size:15px}
+  .side-menu-toggle{width:36px;height:36px}
+  .balance-card>strong{font-size:25px}
+  .balance-details{font-size:9px}
+  .action-btn{font-size:10px}
+  .action-btn span{font-size:16px;margin-right:1px}
+  .entry-value{font-size:10px}
+}
+@media (max-height:520px) and (orientation:landscape){
+  body{padding:8px}
+  .app-shell{min-height:calc(100svh - 16px);padding-top:12px}
+  .month-heading{margin:12px 4px}
+  .balance-card{padding:12px 16px}
+  .balance-card>strong{margin:2px 0 7px;font-size:25px}
+  .actions{margin:10px 0}
+}
