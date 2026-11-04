@@ -4,17 +4,23 @@ on:
     branches: [main]
 permissions:
   pages: write
+  deployments: write
   contents: read
 jobs:
   liberar:
     runs-on: ubuntu-latest
     steps:
-      - name: Cancelar publicação travada
+      - name: Remover registro de publicação travada
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl --fail-with-body -sS -X POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $GH_TOKEN" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "https://api.github.com/repos/$GITHUB_REPOSITORY/pages/deployments/9814aa6f8dcbfcd5d9ca0ea65b1a4f090b42fb14/cancel"
+          API="https://api.github.com/repos/$GITHUB_REPOSITORY"
+          HEADERS=(-H "Accept: application/vnd.github+json" -H "Authorization: Bearer $GH_TOKEN" -H "X-GitHub-Api-Version: 2022-11-28")
+          ID=$(curl --fail-with-body -sS "$API/deployments?sha=9814aa6f8dcbfcd5d9ca0ea65b1a4f090b42fb14" "${HEADERS[@]}" | jq -r '.[0].id // empty')
+          if [ -z "$ID" ]; then
+            echo "Nenhum registro de deployment encontrado para o SHA travado."
+            exit 1
+          fi
+          curl --fail-with-body -sS -X POST "$API/deployments/$ID/statuses" "${HEADERS[@]}" -d '{"state":"inactive","description":"Liberando registro Pages travado"}'
+          curl --fail-with-body -sS -X DELETE "$API/deployments/$ID" "${HEADERS[@]}"
+          echo "Registro de deployment $ID removido."
