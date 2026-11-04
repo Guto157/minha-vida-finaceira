@@ -263,3 +263,13 @@ button:focus-visible{outline:3px solid #79a9b9;outline-offset:2px}
 .side-menu-account .cloud-form-actions button{min-height:38px;padding:9px 7px}
 .side-menu-account .cloud-form-actions button:last-child{grid-column:1/-1}
 .side-menu-account .cloud-logout{width:100%;min-height:40px}
+
+
+/* Sinais e cores financeiros */
+.entry-value.debt{color:#c44949!important}
+.entry-value.payment{color:#27834f!important}
+#debtTotal{color:#ffb0a9!important}
+#paymentTotal{color:#a9e6bd!important}
+.history-item .history-balance-debt{color:#c44949!important}
+.history-item .history-balance-payment{color:#27834f!important}
+.history-item .history-balance-zero{color:#244e70!important}
