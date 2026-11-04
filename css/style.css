@@ -177,3 +177,73 @@ dialog{max-height:calc(100svh - 24px);overflow-y:auto}
 .reserve-deposit-row small{font-size:10px;color:#92999e;margin-top:3px}
 .reserve-deposit-row b{font-size:12px;color:#28814d;white-space:nowrap}
 @media(max-width:360px){.reserve-input-row{flex-wrap:wrap}.reserve-input-row input{flex-basis:100%}.reserve-input-row button{width:100%;min-height:40px}.reserve-stats article strong{font-size:13px}}
+
+/* Refinamento visual da aba Reserva */
+.view-tabs{gap:6px;padding:5px;background:linear-gradient(135deg,#e8eff0,#f0f3ef);border:1px solid #dce6e5;border-radius:15px;box-shadow:inset 0 1px 3px #243e4a0a}
+.view-tab{position:relative;min-height:46px;border-radius:11px;font-size:13px;font-weight:800;letter-spacing:.1px;transition:background .18s,transform .18s,box-shadow .18s}
+.view-tab:active{transform:scale(.98)}
+.view-tab.active{background:linear-gradient(135deg,#244e70,#34718a);box-shadow:0 4px 10px #244e7030;color:#fff}
+#entriesTab:before{content:"▤";font-size:15px;margin-right:8px}
+#reserveTab:before{content:"◈";font-size:15px;margin-right:8px}
+.reserve-view{gap:16px}
+.reserve-intro{padding:8px 4px 2px}
+.reserve-intro .eyebrow{display:inline-flex;align-items:center;gap:6px;color:#4c8b70;letter-spacing:1.5px}
+.reserve-intro .eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:#58a77b;box-shadow:0 0 0 4px #58a77b20}
+.reserve-intro h2{font-family:'DM Sans',sans-serif;font-size:clamp(22px,5vw,27px);font-weight:800;letter-spacing:-.8px;line-height:1.18;color:#244e70;margin:8px 0}
+.reserve-intro p{max-width:440px;font-size:12px;line-height:1.65;color:#77868c}
+.reserve-target-card{position:relative;overflow:hidden;padding:21px 20px 19px;border:1px solid #2f6980;border-radius:17px;background:radial-gradient(circle at 95% 0%,#5aa38a55 0,transparent 37%),linear-gradient(130deg,#1e4969 0%,#28677a 100%);box-shadow:0 9px 22px #244e7028}
+.reserve-target-card:after{content:"R$";position:absolute;right:17px;top:12px;font-size:66px;font-weight:800;letter-spacing:-5px;color:#ffffff0c;pointer-events:none}
+.reserve-target-card span{position:relative;z-index:1;color:#d8e8ed;font-size:11px;font-weight:600;letter-spacing:.15px}
+.reserve-target-card strong{position:relative;z-index:1;font-size:clamp(29px,7vw,36px);font-weight:800;letter-spacing:-1.2px;margin:9px 0 7px}
+.reserve-target-card small{position:relative;z-index:1;color:#d0e1e5;font-size:10px;line-height:1.5}
+.reserve-input-card,.reserve-panel{padding:17px;border:1px solid #e2e9e5;border-radius:15px;background:linear-gradient(145deg,#fffefa,#fbfcf8);box-shadow:0 5px 15px #2634430a}
+.reserve-input-card label{display:flex;align-items:center;gap:7px;margin:3px 0 8px;color:#405e70;font-size:11px;font-weight:800}
+.reserve-input-card label:before{content:"";width:4px;height:13px;border-radius:5px;background:#67a783}
+.reserve-input-row{gap:8px;margin-bottom:16px}
+.reserve-input-row:last-of-type{margin-bottom:11px}
+.reserve-input-row input{min-height:45px;padding:11px 13px;border:1px solid #dce5e3;border-radius:10px;background:#fff;color:#263d4c;font-size:13px;transition:border-color .18s,box-shadow .18s}
+.reserve-input-row input:focus{border-color:#5c9b81;box-shadow:0 0 0 3px #5c9b811c;outline:none}
+.reserve-input-row input::placeholder{color:#a6b0b1}
+.reserve-input-row button{min-width:112px;min-height:45px;padding:10px 15px;border:1px solid #285f75;border-radius:10px;background:linear-gradient(135deg,#285c75,#347b83);box-shadow:0 3px 8px #285c7524;color:#fff;font-size:11px;font-weight:800;transition:transform .15s,filter .15s,box-shadow .15s}
+.reserve-input-row button:hover{filter:brightness(1.07);box-shadow:0 5px 12px #285c7530}
+.reserve-input-row button:active{transform:translateY(1px) scale(.98)}
+.reserve-note{padding:9px 10px;border-radius:8px;background:#f0f5f1;color:#72847a;font-size:10px}
+.reserve-panel{padding:17px}
+.reserve-panel>.notebook-title{align-items:center;margin-bottom:3px;padding-bottom:12px}
+.reserve-panel>.notebook-title h3,.reserve-deposits .notebook-title h3{font-family:'DM Sans',sans-serif;font-size:15px;font-weight:800;letter-spacing:-.25px;color:#2e5368}
+#reserveProgressLabel{padding:5px 9px;border-radius:20px;background:#e6f3e9;color:#34805a;font-size:11px;font-weight:800}
+.reserve-progress{height:11px;margin:13px 0 16px;border-radius:20px;background:#e9efed;box-shadow:inset 0 1px 2px #26344310}
+.reserve-progress span{background:linear-gradient(90deg,#4b9a73,#78b98b);box-shadow:0 1px 4px #4b9a7355}
+.reserve-stats{gap:9px}
+.reserve-stats article{min-height:79px;display:flex;flex-direction:column;justify-content:center;padding:12px;border:1px solid #e7ece8;border-radius:11px;background:linear-gradient(145deg,#fff,#fbfcf9);box-shadow:0 2px 6px #26344307}
+.reserve-stats article small{font-size:10px;font-weight:600;line-height:1.4;color:#7b8b8d}
+.reserve-stats article strong{font-size:clamp(14px,3.3vw,17px);font-weight:800;letter-spacing:-.35px;color:#315a75}
+.reserve-stats article:nth-child(2) strong{color:#318258}
+.reserve-stats article:nth-child(3) strong{color:#b27639}
+.reserve-stats article:nth-child(4) strong{color:#526f9b}
+.reserve-stats .reserve-stat-wide{min-height:74px;border-color:#dcebe1;background:linear-gradient(120deg,#eff7f0,#f7faf5)}
+.reserve-stats .reserve-stat-wide strong{color:#318258;font-size:17px}
+.reserve-deposits{margin-top:20px}
+.reserve-deposits .notebook-title{padding-bottom:10px}
+#reserveDepositCount{padding:4px 8px;border-radius:20px;background:#edf2f1;color:#728487;font-size:10px}
+.reserve-deposit-row{padding:12px 5px;border-bottom:1px solid #edf0ec}
+.reserve-deposit-row>div{display:flex;flex-direction:column;gap:2px}
+.reserve-deposit-row span{font-size:12px;color:#405a67}
+.reserve-deposit-row small{font-size:10px;color:#9aa5a2}
+.reserve-deposit-row b{padding:6px 9px;border-radius:8px;background:#eaf5ed;color:#34805a;font-size:12px}
+.reserve-deposits .empty-state{margin:0;padding:18px 8px;border-radius:9px;background:#f7f9f6;font-size:11px}
+button{ -webkit-tap-highlight-color:transparent }
+button:focus-visible{outline:3px solid #79a9b9;outline-offset:2px}
+@media(max-width:420px){
+ .reserve-input-card,.reserve-panel{padding:14px}
+ .reserve-input-row{align-items:stretch}
+ .reserve-input-row button{min-width:100px;padding:9px 10px}
+ .reserve-stats{gap:7px}
+ .reserve-stats article{padding:10px;min-height:74px}
+ .reserve-target-card{padding:19px 16px}
+}
+@media(max-width:350px){
+ .reserve-input-row{flex-wrap:wrap}
+ .reserve-input-row input,.reserve-input-row button{flex:1 1 100%;width:100%}
+ .view-tab{font-size:11px}
+}
