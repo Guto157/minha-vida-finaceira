@@ -40,6 +40,11 @@
       <div><span class="eyebrow">FOLHA DO MÊS</span><h2 id="monthTitle">Mês</h2></div>
       <button class="month-arrow" id="nextMonth" aria-label="Próximo mês">›</button>
     </section>
+    <nav class="view-tabs" aria-label="Seções do aplicativo">
+      <button type="button" class="view-tab active" id="entriesTab" aria-selected="true">Lançamentos</button>
+      <button type="button" class="view-tab" id="reserveTab" aria-selected="false">Reserva</button>
+    </nav>
+    <div id="entriesView">
     <section class="balance-card" aria-live="polite">
       <span class="eyebrow">SALDO ATUAL</span>
       <strong id="balanceValue">R$ 0,00</strong>
@@ -54,6 +59,42 @@
       <div class="notebook-title"><h3>Lançamentos</h3><span id="entryCount">0 registros</span></div>
       <div id="entries" class="entries"></div>
       <p id="emptyState" class="empty-state">Sua folha está em branco.<br>Adicione uma dívida ou um pagamento para começar.</p>
+    </section>
+    </div>
+    <section id="reserveView" class="reserve-view" hidden>
+      <div class="reserve-intro">
+        <span class="eyebrow">PLANEJAMENTO FINANCEIRO</span>
+        <h2>Seu caminho para ficar no azul</h2>
+        <p>A meta acompanha automaticamente o saldo da folha principal. Cada pagamento reduz o valor que falta.</p>
+      </div>
+      <div class="reserve-target-card">
+        <span>Valor que falta para zerar suas dívidas</span>
+        <strong id="reserveTarget">R$ 0,00</strong>
+        <small id="reserveTargetHint">Calculando seu saldo...</small>
+      </div>
+      <div class="reserve-input-card">
+        <label for="reserveMonthly">Quanto consegue guardar por mês?</label>
+        <div class="reserve-input-row"><input id="reserveMonthly" inputmode="decimal" placeholder="Ex.: 200,00"><button type="button" id="saveReserveGoal">Salvar meta</button></div>
+        <label for="reserveDeposit">Guardou algum valor agora?</label>
+        <div class="reserve-input-row"><input id="reserveDeposit" inputmode="decimal" placeholder="Ex.: 50,00"><button type="button" id="addReserveDeposit">Registrar</button></div>
+        <small class="reserve-note">Os valores guardados ficam separados dos pagamentos das dívidas.</small>
+      </div>
+      <section class="reserve-panel">
+        <div class="notebook-title"><h3>Painel para ficar no azul</h3><span id="reserveProgressLabel">0%</span></div>
+        <div class="reserve-progress"><span id="reserveProgressBar"></span></div>
+        <div class="reserve-stats">
+          <article><small>Saldo devedor atual</small><strong id="reserveDebtStat">R$ 0,00</strong></article>
+          <article><small>Total já guardado</small><strong id="reserveSavedStat">R$ 0,00</strong></article>
+          <article><small>Falta guardar</small><strong id="reserveRemainingStat">R$ 0,00</strong></article>
+          <article><small>Meta mensal</small><strong id="reserveMonthlyStat">R$ 0,00</strong></article>
+          <article class="reserve-stat-wide"><small>Previsão para ficar no azul</small><strong id="reserveForecast">Defina uma meta mensal</strong></article>
+        </div>
+        <div class="reserve-deposits">
+          <div class="notebook-title"><h3>Valores reservados</h3><span id="reserveDepositCount">0 registros</span></div>
+          <div id="reserveDepositList"></div>
+          <p id="reserveEmpty" class="empty-state">Você ainda não registrou valores guardados.</p>
+        </div>
+      </section>
     </section>
     <footer>Seus registros ficam salvos neste aparelho.</footer>
   </main>
