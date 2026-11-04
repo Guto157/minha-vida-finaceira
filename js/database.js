@@ -27,6 +27,7 @@ function saveMonth(y,m,month){
  write(data);
 }
 function all(){return read().months}
+function saveReserve(reserve){const data=read();data.reserve=reserve;write(data)}
 function importData(data){if(!data||!data.months||typeof data.months!=='object')throw new Error('Arquivo de backup inválido.');write(data)}
 function replaceData(data){if(!data||!data.months||typeof data.months!=='object')throw new Error('Dados financeiros inválidos.');write(data,false)}
 function mergeData(remote,local){
@@ -47,7 +48,12 @@ function mergeData(remote,local){
   if(i>0)current.carry=total(previous);
   previous=current;
  });
+ const rr=remote&&remote.reserve||{},lr=local&&local.reserve||{};
+ const selected=Number(lr.updatedAt||0)>=Number(rr.updatedAt||0)?lr:rr;
+ const deposits=new Map();
+ [...(rr.deposits||[]),...(lr.deposits||[])].forEach((item,i)=>deposits.set(item.id||('reserve-'+i+'-'+item.date+'-'+item.amount),item));
+ merged.reserve={monthlyGoal:Number(selected.monthlyGoal)||0,updatedAt:Number(selected.updatedAt)||0,deposits:[...deposits.values()]};
  return merged;
 }
-window.Database={key,getMonth,saveMonth,all,importData,replaceData,read,mergeData};
+window.Database={key,getMonth,saveMonth,all,saveReserve,importData,replaceData,read,mergeData};
 })();

@@ -144,3 +144,36 @@ dialog{max-height:calc(100svh - 24px);overflow-y:auto}
 .cloud-form-actions button{flex:1}
 .cloud-form-actions button:last-child{background:#e9eef0;color:#526d80}
 .cloud-logout{margin-top:10px;background:#e9eef0!important;color:#526d80!important}
+
+/* Aba Reserva e painel de evolução */
+.view-tabs{display:grid;grid-template-columns:1fr 1fr;gap:7px;padding:5px;margin:18px 0 14px;background:#e9eff0;border:1px solid #dce5e8;border-radius:11px}
+.view-tab{border:0;border-radius:8px;padding:11px 8px;background:transparent;color:#607783;font:700 12px 'DM Sans',sans-serif;cursor:pointer}
+.view-tab.active{background:#244e70;color:#fff;box-shadow:0 2px 7px #244e7025}
+[hidden]{display:none!important}
+.reserve-view{display:grid;gap:13px}
+.reserve-intro{padding:4px 3px 2px}
+.reserve-intro h2{font-family:'Patrick Hand',cursive;font-size:27px;color:#244e70;margin:4px 0}
+.reserve-intro p{font-size:12px;line-height:1.55;color:#74828a;margin:4px 0}
+.reserve-target-card{padding:18px;border-radius:12px;background:#244e70;color:#fff;box-shadow:0 5px 14px #244e7025}
+.reserve-target-card span,.reserve-target-card small{display:block;color:#d3e0e8;font-size:11px}
+.reserve-target-card strong{display:block;font-size:30px;letter-spacing:-.7px;margin:7px 0}
+.reserve-input-card,.reserve-panel{padding:14px;border:1px solid #e2e7e4;border-radius:11px;background:#fffdf7;box-shadow:0 3px 10px #26344309}
+.reserve-input-card label{display:block;font-size:11px;font-weight:700;color:#526d80;margin:3px 0 7px}
+.reserve-input-row{display:flex;gap:7px;margin-bottom:14px}
+.reserve-input-row input{min-width:0;flex:1;border:1px solid #d9e0e4;border-radius:8px;padding:11px;font:13px 'DM Sans',sans-serif}
+.reserve-input-row button{border:0;border-radius:8px;padding:9px 12px;background:#244e70;color:#fff;font:700 11px 'DM Sans',sans-serif;cursor:pointer}
+.reserve-note{display:block;font-size:10px;color:#8b969b;line-height:1.45}
+.reserve-progress{height:9px;margin:12px 0 15px;border-radius:99px;background:#e7edef;overflow:hidden}
+.reserve-progress span{display:block;width:0;height:100%;border-radius:99px;background:#4c9a70;transition:width .2s}
+.reserve-stats{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.reserve-stats article{padding:11px;border:1px solid #e7ece9;border-radius:9px;background:#fff}
+.reserve-stats article small{display:block;color:#7f8c91;font-size:10px;margin-bottom:5px}
+.reserve-stats article strong{display:block;color:#315a75;font-size:15px;overflow-wrap:anywhere}
+.reserve-stat-wide{grid-column:1/-1}
+.reserve-deposits{margin-top:18px}
+.reserve-deposit-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 2px;border-bottom:1px dashed #d9e0e5}
+.reserve-deposit-row span,.reserve-deposit-row small{display:block}
+.reserve-deposit-row span{font-size:12px;font-weight:600;color:#354b59}
+.reserve-deposit-row small{font-size:10px;color:#92999e;margin-top:3px}
+.reserve-deposit-row b{font-size:12px;color:#28814d;white-space:nowrap}
+@media(max-width:360px){.reserve-input-row{flex-wrap:wrap}.reserve-input-row input{flex-basis:100%}.reserve-input-row button{width:100%;min-height:40px}.reserve-stats article strong{font-size:13px}}
