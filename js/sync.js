@@ -11,7 +11,7 @@ function renderAuth(){
  $('cloudForm').hidden=logged||!$('cloudForm').dataset.open;
  $('cloudOpenBtn').hidden=logged;
  $('cloudLogoutBtn').hidden=!logged;
- $('cloudTitle').textContent=logged?'Conta conectada':'Sincronizar aparelhos';
+ $('cloudTitle').textContent=logged?'Conta: '+((session.user&&session.user.email)||'conectada'):'Sincronizar aparelhos';
  $('cloudOpenBtn').textContent='Conectar';
  if(logged)status('Conta conectada. Seus dados serão sincronizados.');
 }
