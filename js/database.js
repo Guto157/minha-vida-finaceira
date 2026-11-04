@@ -3,13 +3,13 @@ const KEY='minhaVidaFinanceira_v1';
 function read(){try{return JSON.parse(localStorage.getItem(KEY))||{months:{}}}catch(e){return{months:{}}}}
 function write(data,notify=true){localStorage.setItem(KEY,JSON.stringify(data));if(notify)window.dispatchEvent(new Event('finance-data-changed'))}
 function key(y,m){return y+'-'+String(m+1).padStart(2,'0')}
-function total(month){return (Number(month.carry)||0)+(month.entries||[]).reduce((sum,e)=>sum+(e.type==='debt'?1:-1)*Number(e.amount||0),0)}
+function total(month){return (month.entries||[]).reduce((sum,e)=>sum+(e.type==='debt'?1:-1)*Number(e.amount||0),0)}
 function getMonth(y,m){
  const data=read(),k=key(y,m);
  if(!data.months[k]){
   const earlier=Object.keys(data.months).filter(existing=>existing<k).sort();
   const previous=earlier.length?data.months[earlier[earlier.length-1]]:null;
-  data.months[k]={carry:previous?total(previous):0,entries:[]};
+  data.months[k]={carry:0,entries:[]};
   write(data,false);
  }
  return data.months[k];
@@ -17,13 +17,7 @@ function getMonth(y,m){
 function saveMonth(y,m,month){
  const data=read(),k=key(y,m);
  data.months[k]=month;
- const keys=Object.keys(data.months).sort();
- let previous=null;
- keys.forEach((monthKey,index)=>{
-  const current=data.months[monthKey];
-  if(index>0)current.carry=total(previous);
-  previous=current;
- });
+ Object.values(data.months).forEach(current=>{current.carry=0});
  write(data);
 }
 function all(){return read().months}
@@ -40,14 +34,9 @@ function mergeData(remote,local){
    const id=entry.id||('legacy-'+k+'-'+i+'-'+String(entry.description||'')+'-'+String(entry.amount||''));
    entries.set(id,entry);
   });
-  merged.months[k]={carry:Number(b.carry??a.carry)||0,entries:[...entries.values()]};
+  merged.months[k]={carry:0,entries:[...entries.values()]};
  });
- let previous=null;
- Object.keys(merged.months).sort().forEach((k,i)=>{
-  const current=merged.months[k];
-  if(i>0)current.carry=total(previous);
-  previous=current;
- });
+
  const rr=remote&&remote.reserve||{},lr=local&&local.reserve||{};
  const selected=Number(lr.updatedAt||0)>=Number(rr.updatedAt||0)?lr:rr;
  const deposits=new Map();
