@@ -16,8 +16,7 @@
       <div><span class="eyebrow">MEU CADERNO</span><h1>Minha Vida Financeira</h1></div>
       <button class="side-menu-toggle" id="openSideMenu" aria-label="Abrir menu">☰</button>
     </header>
-    <div class="side-menu-backdrop" id="sideMenuBackdrop"></div>
-    <aside class="side-menu" id="sideMenu" aria-label="Menu lateral" aria-hidden="true">
+    <dialog class="side-menu" id="sideMenu" aria-label="Menu lateral"><div class="side-menu-panel">
       <div class="side-menu-head"><div><span class="eyebrow">MINHA VIDA FINANCEIRA</span><h2>Menu</h2></div><button class="side-menu-close" id="closeSideMenu" aria-label="Fechar menu">×</button></div>
       <div class="side-menu-items">
         <button class="side-menu-item" id="backupBtn"><span>▤</span><span><strong>Baixar PDF</strong><small>Relatório das dívidas e pagamentos</small></span></button>
@@ -26,7 +25,7 @@
         <button class="side-menu-item" id="historyBtn"><span>▦</span><span><strong>Histórico mensal</strong><small>Consultar outros meses</small></span></button>
       </div>
       <input id="restoreFile" type="file" accept="application/json,.json" hidden>
-    </aside>
+    </div></dialog>
     <section class="month-heading">
       <button class="month-arrow" id="prevMonth" aria-label="Mês anterior">‹</button>
       <div><span class="eyebrow">FOLHA DO MÊS</span><h2 id="monthTitle">Mês</h2></div>
@@ -47,7 +46,6 @@
       <div id="entries" class="entries"></div>
       <p id="emptyState" class="empty-state">Sua folha está em branco.<br>Adicione uma dívida ou um pagamento para começar.</p>
     </section>
-    <button class="history-button" id="historyBtn">▤　Histórico mensal</button>
     <footer>Seus registros ficam salvos neste aparelho.</footer>
   </main>
 
