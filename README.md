@@ -19,3 +19,7 @@ Os dados desta versão ficam no armazenamento local do navegador (`localStorage`
 
 ## Próxima etapa Android
 Esta versão é a base web/PWA. A preparação do pacote Android (APK/AAB) com Capacitor e a configuração de publicação na Play Store serão feitas em uma etapa seguinte.
+
+## Atualizações recentes
+- Saldo devedor exibido com sinal negativo.
+- Exportação do histórico financeiro em PDF.
