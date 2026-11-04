@@ -14,7 +14,7 @@
   <main class="app-shell">
     <header class="topbar">
       <div><span class="eyebrow">MEU CADERNO</span><h1>Minha Vida Financeira</h1></div>
-      <div class="header-tools"><button class="mini-tool" id="backupBtn" title="Baixar relatório em PDF">PDF</button><button class="mini-tool" id="exportDataBtn" title="Criar backup dos dados">Backup</button><button class="mini-tool" id="importDataBtn" title="Restaurar backup">Restaurar</button><input id="restoreFile" type="file" accept="application/json,.json" hidden></div>
+      <details class="tools-menu"><summary aria-label="Mais opções" title="Mais opções">⋯ <span>Opções</span></summary><div class="tools-panel"><button class="mini-tool" id="backupBtn" title="Baixar relatório em PDF"><span>▤</span> Baixar PDF</button><button class="mini-tool" id="exportDataBtn" title="Criar backup dos dados"><span>↓</span> Fazer backup</button><button class="mini-tool" id="importDataBtn" title="Restaurar backup"><span>↑</span> Restaurar backup</button></div><input id="restoreFile" type="file" accept="application/json,.json" hidden></details>
     </header>
     <section class="month-heading">
       <button class="month-arrow" id="prevMonth" aria-label="Mês anterior">‹</button>
