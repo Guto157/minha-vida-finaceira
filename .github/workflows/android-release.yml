@@ -39,6 +39,21 @@ jobs:
       - name: Instalar dependências do aplicativo
         run: npm install
 
+      - name: Preparar arquivos web para o Capacitor
+        shell: bash
+        run: |
+          mkdir -p www
+          cp index.html manifest.webmanifest privacidade.html excluir-conta.html www/
+          cp -R css js assets www/
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p = Path("capacitor.config.json")
+          config = json.loads(p.read_text())
+          config["webDir"] = "www"
+          p.write_text(json.dumps(config, ensure_ascii=False))
+          PY
+
       - name: Criar projeto Android
         run: npx cap add android
 
