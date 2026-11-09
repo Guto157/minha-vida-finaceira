@@ -287,3 +287,5 @@ button:focus-visible{outline:3px solid #79a9b9;outline-offset:2px}
  .entry-desc{font-size:12px}
  .entry-value{font-size:10px}
 }
+
+.cloud-delete{width:100%;margin-top:8px;background:#fff1ef!important;color:#a43e38!important;border:1px solid #f0d1cc!important}.cloud-delete:disabled{opacity:.6;cursor:wait}
