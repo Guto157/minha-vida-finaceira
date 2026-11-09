@@ -43,7 +43,7 @@ jobs:
         run: |
           npm install --no-save sharp
           mkdir -p play-store-assets
-          node -e "require('sharp')('assets/icons/icon.svg').resize(512,512).png().toFile('play-store-assets/app-icon-512.png')"
+          node -e "const sharp=require('sharp'); Promise.all([sharp('assets/icons/icon.svg').resize(512,512).png().toFile('play-store-assets/app-icon-512.png'),sharp('play-store-assets/feature-graphic.svg').resize(1024,500).png().toFile('play-store-assets/feature-graphic-1024x500.png')])"
 
       - name: Preparar arquivos web para o Capacitor
         shell: bash
@@ -155,5 +155,6 @@ jobs:
           path: |
             android/app/build/outputs/bundle/release/*.aab
             play-store-assets/app-icon-512.png
+            play-store-assets/feature-graphic-1024x500.png
           if-no-files-found: error
           retention-days: 14
