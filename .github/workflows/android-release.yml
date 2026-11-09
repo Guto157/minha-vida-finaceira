@@ -127,7 +127,7 @@ jobs:
             exit 0
           fi
           echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/upload-key.jks"
-          export KEYSTORE_PATH="$RUNNER_TEMP/upload-key.jks"
+          echo "KEYSTORE_PATH=$RUNNER_TEMP/upload-key.jks" >> "$GITHUB_ENV"
           python3 - <<'PY'
           from pathlib import Path
           p = Path("android/app/build.gradle")
@@ -148,6 +148,11 @@ jobs:
           PY
 
       - name: Gerar AAB
+        env:
+          KEYSTORE_PATH: ${{ runner.temp }}/upload-key.jks
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
         run: |
           cd android
           chmod +x gradlew
