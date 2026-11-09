@@ -2,6 +2,7 @@
 const URL='https://tmhroqjzofnyvmqrukti.supabase.co';
 const KEY='sb_publishable_67-9Wv12QKqds11BhKwCIw_lbdKeIPY';
 const TABLE='user_finance_data',SESSION_KEY='mvf_supabase_session';
+const DELETE_FUNCTION='/functions/v1/delete-account';
 const $=id=>document.getElementById(id);
 let session=null,busy=false,timer=null;
 function status(message){$('cloudStatus').textContent=message}
@@ -11,6 +12,7 @@ function renderAuth(){
  $('cloudForm').hidden=logged||!$('cloudForm').dataset.open;
  $('cloudOpenBtn').hidden=logged;
  $('cloudLogoutBtn').hidden=!logged;
+ $('cloudDeleteBtn').hidden=!logged;
  $('cloudTitle').textContent=logged?'Conta: '+((session.user&&session.user.email)||'conectada'):'Sincronizar aparelhos';
  $('cloudOpenBtn').textContent='Conectar';
  if(logged)status('Conta conectada. Seus dados serão sincronizados.');
@@ -74,6 +76,21 @@ $('cloudCancelBtn').addEventListener('click',()=>{$('cloudForm').dataset.open=''
 $('cloudForm').addEventListener('submit',e=>{e.preventDefault();authenticate('login')});
 $('cloudSignupBtn').addEventListener('click',()=>authenticate('signup'));
 $('cloudLogoutBtn').addEventListener('click',()=>{saveSession(null);status('Saiu da conta. Os dados continuam salvos neste aparelho.')});
+$('cloudDeleteBtn').addEventListener('click',deleteAccount);
+async function deleteAccount(){
+ if(!session||!session.access_token)return;
+ const confirmed=confirm('ATENÇÃO: esta ação é permanente. Sua conta, os dados sincronizados na nuvem e todos os lançamentos, pagamentos, dívidas e valores da Reserva salvos neste aparelho serão apagados. Deseja continuar?');
+ if(!confirmed)return;
+ const button=$('cloudDeleteBtn');button.disabled=true;button.textContent='Excluindo conta...';status('Excluindo sua conta e seus dados...');
+ try{
+  await request(DELETE_FUNCTION,{method:'POST',body:JSON.stringify({})},session.access_token);
+  Database.clearAll();saveSession(null);status('Conta e dados excluídos com sucesso.');
+  window.dispatchEvent(new Event('finance-data-changed'));
+  alert('Sua conta e todos os dados financeiros locais e da nuvem foram excluídos.');
+  location.reload();
+ }catch(e){status('Não foi possível excluir a conta: '+e.message);alert('Não foi possível concluir a exclusão. Nenhum dado local foi apagado. '+e.message)}
+ finally{button.disabled=false;button.textContent='Excluir minha conta e meus dados'}
+}
 window.addEventListener('finance-data-changed',()=>{if(session){clearTimeout(timer);timer=setTimeout(synchronize,900)}});
 window.addEventListener('online',synchronize);
 window.addEventListener('finance-cloud-updated',()=>{});
