@@ -289,3 +289,6 @@ button:focus-visible{outline:3px solid #79a9b9;outline-offset:2px}
 }
 
 .cloud-delete{width:100%;margin-top:8px;background:#fff1ef!important;color:#a43e38!important;border:1px solid #f0d1cc!important}.cloud-delete:disabled{opacity:.6;cursor:wait}
+
+/* Espaço reservado para o banner nativo do AdMob. */
+body.has-native-ad .app-shell{padding-bottom:100px}
