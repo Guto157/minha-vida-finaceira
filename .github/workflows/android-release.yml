@@ -152,6 +152,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: minha-vida-financeira-aab
-          path: |\n            android/app/build/outputs/bundle/release/*.aab\n            play-store-assets/app-icon-512.png
+          path: |
+            android/app/build/outputs/bundle/release/*.aab
+            play-store-assets/app-icon-512.png
           if-no-files-found: error
           retention-days: 14
