@@ -1,0 +1,112 @@
+name: Android AAB
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '**'
+      - '.github/workflows/android-release.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o projeto
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+        continue-on-error: true
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Instalar Android SDK
+        uses: android-actions/setup-android@v3
+      - name: Instalar plataforma Android 36
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Instalar dependências do aplicativo
+        run: npm install
+
+      - name: Criar projeto Android
+        run: npx cap add android
+
+      - name: Ajustar projeto para Android 16 (API 36)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("android/variables.gradle")
+          s = p.read_text()
+          s = s.replace("compileSdkVersion = 35", "compileSdkVersion = 36")
+          s = s.replace("targetSdkVersion = 35", "targetSdkVersion = 36")
+          p.write_text(s)
+          p = Path("android/build.gradle")
+          s = p.read_text().replace("com.android.tools.build:gradle:8.7.2", "com.android.tools.build:gradle:8.9.1")
+          p.write_text(s)
+          p = Path("android/gradle/wrapper/gradle-wrapper.properties")
+          s = p.read_text().replace("gradle-8.11.1-all.zip", "gradle-8.11.1-all.zip")
+          if "gradle-8.11.1" not in s:
+              import re
+              s = re.sub(r"gradle-[0-9.]+-(?:all|bin)\\.zip", "gradle-8.11.1-all.zip", s)
+          p.write_text(s)
+          PY
+
+      - name: Sincronizar arquivos web e plugins
+        run: npx cap sync android
+
+      - name: Configurar assinatura de lançamento
+        if: ${{ secrets.ANDROID_KEYSTORE_BASE64 != '' && secrets.ANDROID_KEYSTORE_PASSWORD != '' && secrets.ANDROID_KEY_ALIAS != '' && secrets.ANDROID_KEY_PASSWORD != '' }}
+        env:
+          ANDROID_KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          ANDROID_KEYSTORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          ANDROID_KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          ANDROID_KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        shell: bash
+        run: |
+          echo "$ANDROID_KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/upload-key.jks"
+          export KEYSTORE_PATH="$RUNNER_TEMP/upload-key.jks"
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path("android/app/build.gradle")
+          s = p.read_text()
+          signing = """
+              signingConfigs {
+                  release {
+                      storeFile file(System.getenv("KEYSTORE_PATH"))
+                      storePassword System.getenv("ANDROID_KEYSTORE_PASSWORD")
+                      keyAlias System.getenv("ANDROID_KEY_ALIAS")
+                      keyPassword System.getenv("ANDROID_KEY_PASSWORD")
+                  }
+              }
+          """
+          s = s.replace("    buildTypes {", signing + "\\n    buildTypes {", 1)
+          s = s.replace("        release {", "        release {\\n            signingConfig signingConfigs.release", 1)
+          p.write_text(s)
+          PY
+
+      - name: Gerar AAB
+        run: |
+          cd android
+          chmod +x gradlew
+          ./gradlew bundleRelease
+
+      - name: Publicar arquivo AAB como artefato
+        uses: actions/upload-artifact@v4
+        with:
+          name: minha-vida-financeira-aab
+          path: android/app/build/outputs/bundle/release/*.aab
+          if-no-files-found: error
+          retention-days: 14
