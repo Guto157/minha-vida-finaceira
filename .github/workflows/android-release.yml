@@ -41,7 +41,7 @@ jobs:
 
       - name: Gerar ícone PNG da loja
         run: |
-          npm install --no-save sharp
+          npm install --no-save sharp playwright
           mkdir -p play-store-assets
           node -e "const sharp=require('sharp'); Promise.all([sharp('assets/icons/icon.svg').resize(512,512).png().toFile('play-store-assets/app-icon-512.png'),sharp('play-store-assets/feature-graphic.svg').resize(1024,500).png().toFile('play-store-assets/feature-graphic-1024x500.png')])"
 
@@ -59,6 +59,11 @@ jobs:
           config["webDir"] = "www"
           p.write_text(json.dumps(config, ensure_ascii=False))
           PY
+
+      - name: Gerar capturas de tela reais da interface
+        run: |
+          npx playwright install --with-deps chromium
+          node scripts/generate-store-screenshots.mjs
 
       - name: Criar projeto Android
         run: npx cap add android
@@ -156,5 +161,7 @@ jobs:
             android/app/build/outputs/bundle/release/*.aab
             play-store-assets/app-icon-512.png
             play-store-assets/feature-graphic-1024x500.png
+            play-store-assets/screenshot-lancamentos.png
+            play-store-assets/screenshot-reserva.png
           if-no-files-found: error
           retention-days: 14
