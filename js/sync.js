@@ -2,7 +2,7 @@
 const URL='https://tmhroqjzofnyvmqrukti.supabase.co';
 const KEY='sb_publishable_67-9Wv12QKqds11BhKwCIw_lbdKeIPY';
 const TABLE='user_finance_data',SESSION_KEY='mvf_supabase_session';
-const DELETE_FUNCTION='/functions/v1/delete-account';
+const DELETE_FUNCTION='/functions/v1/dynamic-service';
 const $=id=>document.getElementById(id);
 let session=null,busy=false,timer=null;
 function status(message){$('cloudStatus').textContent=message}
