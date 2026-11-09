@@ -273,3 +273,19 @@ button:focus-visible{outline:3px solid #79a9b9;outline-offset:2px}
 .history-item .history-balance-debt{color:#c44949!important}
 .history-item .history-balance-payment{color:#27834f!important}
 .history-item .history-balance-zero{color:#244e70!important}
+
+
+/* Correção do alinhamento dos lançamentos */
+.entry{grid-template-columns:30px minmax(0,1fr) auto!important;gap:8px!important}
+.entry>div{min-width:0}
+.entry-desc{display:block;min-width:0;overflow-wrap:break-word!important;word-break:normal!important;line-height:1.35}
+.entry-value{white-space:nowrap;justify-self:end}
+.erase{display:flex;align-items:center;justify-content:center;flex:0 0 27px;grid-column:1;grid-row:1;border:0;background:#f4eeee;color:#b65d5d;width:27px;height:27px;border-radius:7px;font-size:15px;cursor:pointer}
+.entry:has(.settle-btn) .settle-btn{grid-column:2/4}
+@media(max-width:380px){
+ .entry{grid-template-columns:27px minmax(0,1fr) auto!important;gap:6px!important}
+ .entry-desc{font-size:12px}
+ .entry-value{font-size:10px}
+}
+
+.cloud-delete{width:100%;margin-top:8px;background:#fff1ef!important;color:#a43e38!important;border:1px solid #f0d1cc!important}.cloud-delete:disabled{opacity:.6;cursor:wait}
