@@ -1,5 +1,5 @@
-const CACHE='minha-vida-financeira-v24';
-const FILES=['./','./index.html','./css/style.css?v=17','./js/database.js','./js/financeiro.js','./js/historico.js','./js/app.js?v=14','./js/backup.js','./js/sync.js?v=2','./manifest.webmanifest','./assets/icons/icon.svg'];
+const CACHE='minha-vida-financeira-v25';
+const FILES=['./','./index.html','./css/style.css?v=20','./js/database.js','./js/financeiro.js','./js/historico.js','./js/app.js?v=14','./js/backup.js','./js/sync.js?v=3','./excluir-conta.html','./manifest.webmanifest','./assets/icons/icon.svg'];
 self.addEventListener('install',event=>event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(FILES)).then(()=>self.skipWaiting())));
 self.addEventListener('activate',event=>event.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(key=>key!==CACHE).map(key=>caches.delete(key)))).then(()=>self.clients.claim())));
 self.addEventListener('fetch',event=>{if(event.request.method!=='GET')return;const url=new URL(event.request.url);const refresh=event.request.mode==='navigate'||url.pathname.endsWith('/index.html')||url.pathname.endsWith('/js/app.js');if(refresh){event.respondWith(fetch(event.request).then(response=>{if(response.ok){const copy=response.clone();caches.open(CACHE).then(cache=>cache.put(event.request,copy));}return response;}).catch(()=>caches.match(event.request).then(cached=>cached||caches.match('./index.html'))));return;}event.respondWith(caches.match(event.request).then(cached=>cached||fetch(event.request)));});
