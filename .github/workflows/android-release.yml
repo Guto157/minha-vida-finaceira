@@ -72,12 +72,12 @@ jobs:
           manifest = Path("android/app/src/main/AndroidManifest.xml")
           xml = manifest.read_text()
           if "com.google.android.gms.ads.APPLICATION_ID" not in xml:
-              xml = xml.replace("</application>", '        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="@string/admob_app_id" />\\n    </application>')
+              xml = xml.replace("</application>", '        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="@string/admob_app_id" />\n    </application>')
           manifest.write_text(xml)
           strings = Path("android/app/src/main/res/values/strings.xml")
           values = strings.read_text()
           if 'name="admob_app_id"' not in values:
-              values = values.replace("</resources>", '    <string name="admob_app_id">ca-app-pub-5655976483764863~6099310309</string>\\n</resources>')
+              values = values.replace("</resources>", '    <string name="admob_app_id">ca-app-pub-5655976483764863~6099310309</string>\n</resources>')
           strings.write_text(values)
           ads = Path("android/app/src/main/assets/public/js/ads.js")
           if not ads.exists():
