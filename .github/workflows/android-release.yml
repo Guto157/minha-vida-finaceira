@@ -39,6 +39,12 @@ jobs:
       - name: Instalar dependências do aplicativo
         run: npm install
 
+      - name: Gerar ícone PNG da loja
+        run: |
+          npm install --no-save sharp
+          mkdir -p play-store-assets
+          node -e "require('sharp')('assets/icons/icon.svg').resize(512,512).png().toFile('play-store-assets/app-icon-512.png')"
+
       - name: Preparar arquivos web para o Capacitor
         shell: bash
         run: |
@@ -146,6 +152,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: minha-vida-financeira-aab
-          path: android/app/build/outputs/bundle/release/*.aab
+          path: |\n            android/app/build/outputs/bundle/release/*.aab\n            play-store-assets/app-icon-512.png
           if-no-files-found: error
           retention-days: 14
